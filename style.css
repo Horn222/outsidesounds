@@ -1,0 +1,335 @@
+/* =========================
+   VARIABLES
+========================= */
+:root {
+  --accent: #ff4d4d;
+  --accent-gradient: linear-gradient(45deg, #ff4d4d, #ff914d);
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* =========================
+   TOP NAV
+========================= */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 14px 10px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topnav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: 0.25s ease;
+}
+
+.topnav a:hover {
+  background: var(--accent-gradient);
+  border-color: transparent;
+}
+
+/* Prevent sticky nav from covering section titles when clicking anchors */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* =========================
+   HEADER / HERO IMAGE
+========================= */
+header {
+  min-height: 60vh;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.85)),
+    url("images/hero.jpg") center / contain no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+header .hero-text h1 {
+  font-size: 4rem;
+  color: white;
+  letter-spacing: 3px;
+  text-shadow: 0 0 25px rgba(0,0,0,0.9);
+}
+
+@media (max-width: 768px) {
+  header {
+    min-height: 40vh;
+  }
+  header .hero-text h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* =========================
+   ORANGE SERVICES BAR
+========================= */
+#services {
+  background: var(--accent);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+#services h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#services p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+#about {
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  padding: 4rem 2rem;
+}
+
+#about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#about p {
+  font-size: 1.1rem;
+  max-width: 900px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* =========================
+   MUSIC SECTION
+========================= */
+#music {
+  background: linear-gradient(135deg, #3a1c71, #d76d77);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+#music h2 {
+  margin-bottom: 1.5rem;
+}
+
+#music button {
+  background: var(--accent);
+  border: none;
+  padding: 14px 28px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+#music button:hover {
+  background: var(--accent-gradient);
+}
+
+#music iframe {
+  border-radius: 12px;
+  margin-top: 1rem;
+  width: 100%;
+  height: 80px;
+}
+
+#music a {
+  color: #ffd580;
+  text-decoration: underline;
+}
+
+/* =========================
+   BOOKING / CALENDLY
+========================= */
+#booking {
+  background: linear-gradient(135deg, #0f2027, #203a43);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+/* Calendly is a div widget, not an iframe; give it rounded corners visually */
+#booking .calendly-inline-widget {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* =========================
+   SOCIAL / FOLLOW ME
+========================= */
+.social {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #1a1a1a;
+}
+
+.social h2 {
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.social-links a {
+  padding: 12px 24px;
+  border: 2px solid var(--accent);
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.social-links a:hover {
+  background: var(--accent-gradient);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* =========================
+   CONTACT
+========================= */
+#contact {
+  background: linear-gradient(135deg, #102a43, #243b55);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+#contact h2 {
+  margin-bottom: 1rem;
+}
+
+#contact a {
+  color: #ffd580;
+  text-decoration: underline;
+}
+
+/* =========================
+   GIGS / EVENTS
+========================= */
+#gigs {
+  padding: 5rem 2rem;
+  background: #000;
+  text-align: center;
+}
+
+.gigs-subhead {
+  text-align: center;
+  margin-top: 2rem;
+  color: #ffd580;
+  letter-spacing: 0.5px;
+}
+
+.gig-list {
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.gig {
+  padding: 2rem;
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  background: #111;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gig:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(255,77,77,0.5);
+}
+
+.gig h3 {
+  color: #ff914d;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+  transition: 0.3s ease;
+}
+
+.ticket-btn:hover {
+  background: var(--accent-gradient);
+  transform: scale(1.05);
+}
+
+/* =========================
+   GENERAL LAYOUT
+========================= */
+section {
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+button, input, textarea {
+  font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 2rem 1rem;
+  }
+}/* Calendar icon + date row */
+.gig-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.75rem 0;
+  color: #ff914d;
+  font-weight: bold;
+}
+
+.gig-date .cal-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  opacity: 0.95;
+}
+
+.gig-date .cal-icon path,
+.gig-date .cal-icon rect,
+.gig-date .cal-icon line {
+  stroke: currentColor;
+}

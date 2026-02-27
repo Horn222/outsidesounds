@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bruce Horn | Music & Audio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#music">Listen</a>
+    <a href="#booking">Lessons</a>
+    <a href="#gigs">Gigs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hero-text">
+      <h1>Bruce Horn</h1>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2>Services</h2>
+    <p>
+      Musician • Teacher • Producer • Recording Engineer •
+      Session Musician • Gigging & Booking
+    </p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I’m a lifelong professional musician, producer, and educator with over 30 years of experience across live performance, recording, composition, and media production. A true multi-instrumentalist, I specialize in percussion, strings, keyboards, and vocals with the ability to adapt authentically to any genre.
+      <br><br>
+      I’ve performed professionally since age 11 and shared stages with Grand Funk Railroad, Dave Brubeck, The Jon Spencer Blues Explosion, Starcrawler, and Andy Narell.
+      <br><br>
+      In the studio, I’ve worked with Steve Albini and spent decades recording, engineering, and producing music—from analog tape to modern DAWs including Logic Pro X, Pro Tools, Ableton Live, and more.
+      <br><br>
+      Currently accepting new projects and students throughout the Tri-County Michigan area.
+    </p>
+  </section>
+
+  <!-- MUSIC -->
+  <section id="music">
+    <h2>Listen</h2>
+
+    <a href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n?si=bIiEhH_UTWSiqmrGQlQMyA" target="_blank" rel="noopener">
+      <button>Listen on Spotify</button>
+    </a>
+
+    <p style="margin-top:1rem;">Tracks I’ve recorded / produced:</p>
+
+    <iframe style="border-radius:12px;margin-top:1rem;"
+      src="https://open.spotify.com/embed/track/TRACK_ID_1"
+      width="100%" height="80"
+      frameborder="0"
+      allow="encrypted-media">
+    </iframe>
+
+    <iframe style="border-radius:12px;margin-top:1rem;"
+      src="https://open.spotify.com/embed/track/TRACK_ID_2"
+      width="100%" height="80"
+      frameborder="0"
+      allow="encrypted-media">
+    </iframe>
+
+    <iframe style="border-radius:12px;margin-top:1rem;"
+      src="https://open.spotify.com/embed/track/TRACK_ID_3"
+      width="100%" height="80"
+      frameborder="0"
+      allow="encrypted-media">
+    </iframe>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <h2>Schedule a Lesson</h2>
+    <p>Pick a session length from the dropdown:</p>
+
+    <div class="calendly-inline-widget"
+      data-url="https://calendly.com/brucehorn?hide_event_type_details=0&hide_gdpr_banner=1"
+      style="min-width:320px;height:700px;">
+    </div>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </section>
+
+  <!-- SOCIAL -->
+  <section class="social">
+    <h2>Follow Me</h2>
+    <div class="social-links">
+      <a href="https://instagram.com/saunadwarf" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://youtube.com/@MrBrucehorn" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.facebook.com/jonfettquartet/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n?si=bIiEhH_UTWSiqmrGQlQMyA" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://werewolvesband.bandcamp.com/community" target="_blank" rel="noopener">Bandcamp</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Phone: 248-778-8557</p>
+    <p>Email: <a href="mailto:saunadwarf@gmail.com">saunadwarf@gmail.com</a></p>
+  </section>
+
+  <!-- GIGS -->
+  <section id="gigs">
+    <h2>Jon Fett Quartet – Shows</h2>
+
+    <h3 class="gigs-subhead">Upcoming</h3>
+    <div class="gig-list" id="upcoming-gigs">
+
+      <!-- Copy/paste this block to add gigs -->
+      <div class="gig" data-date="2026-02-27">
+        <h3>JFII — February 27, 2026</h3>
+        <p>White Lake Inn — White Lake, MI • 8pm–12am</p>
+      </div>
+
+      <div class="gig" data-date="2026-02-28">
+        <h3>JFQ — February 28, 2026</h3>
+        <p>Billy's Tip'n Inn — Highland, MI • 9pm–1am</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-04">
+        <h3>JFII — March 4, 2026</h3>
+        <p>Scooters — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-05-10">
+        <h3>May 10, 2026</h3>
+        <p>Private Event — Flint, MI</p>
+      </div>
+
+    </div>
+
+    <h3 class="gigs-subhead" style="margin-top:3rem;">Past Shows</h3>
+    <div class="gig-list" id="past-gigs"></div>
+  </section>
+
+  <!-- JS for moving past gigs automatically -->
+  <script src="gigs.js"></script>
+
+</body>
+</html>
