@@ -39,7 +39,7 @@
   <section id="about">
     <h2>About</h2>
     <p>
-      I’m a lifelong professional musician, producer, and educator with over 30 years of experience across live performance, recording, composition, and media production. A true multi-instrumentalist, I specialize in percussion, strings, keyboards, and vocals with the ability to adapt authentically to any genre.
+      I’m a lifelong professional musician, producer, and certified K-12 educator with over 30 years of experience across live performance, recording, composition, and media production. A true multi-instrumentalist, I specialize in percussion, strings, keyboards, and vocals with the ability to adapt authentically to any genre.
       <br><br>
       I’ve performed professionally since age 11 and shared stages with Grand Funk Railroad, Dave Brubeck, The Jon Spencer Blues Explosion, Starcrawler, and Andy Narell.
       <br><br>
@@ -49,51 +49,111 @@
     </p>
   </section>
 
-  <!-- MUSIC -->
-  <section id="music">
-    <h2>Listen</h2>
+ <!-- MUSIC -->
+<section id="music">
+  <h2>Listen</h2>
 
-    <a href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n" target="_blank" rel="noopener">
-      <button>Listen on Spotify</button>
+  <p class="music-intro">
+    Selected projects I’ve produced, recorded, engineered, mixed, or performed on.
+  </p>
+
+  <div class="music-actions">
+    <a class="music-btn primary"
+   href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n"
+   target="_blank" rel="noopener">
+   Listen to Werewolves on Spotify
+</a>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="music-filters" aria-label="Filter projects">
+    <button class="filter-btn active" data-filter="all" type="button">All</button>
+    <button class="filter-btn" data-filter="produced" type="button">Produced</button>
+    <button class="filter-btn" data-filter="engineered" type="button">Engineered</button>
+    <button class="filter-btn" data-filter="mixed" type="button">Mixed/Mastered</button>
+    <button class="filter-btn" data-filter="session" type="button">Session</button>
+    <button class="filter-btn" data-filter="live" type="button">Live</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="music-grid" id="musicGrid">
+
+    <!-- BY THE WILLOW (Artist) -->
+    <a class="music-card" data-tags="engineered session"
+       href="https://open.spotify.com/artist/5XFE4g9rsY428flu9z3Qys"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <!-- Optional: add an image file to /images and set src -->
+        <!-- <img src="images/by-the-willow.jpg" alt="By the Willow cover"> -->
+        <div class="music-cover-fallback">🎧</div>
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">By the Willow</div>
+        <div class="music-meta">Artist Page</div>
+
+        <div class="music-badges">
+          <span class="badge">Engineered</span>
+          <span class="badge">Session</span>
+        </div>
+
+        <div class="music-cta">Open on Spotify →</div>
+      </div>
     </a>
 
-    <p style="margin-top:1rem;">Tracks I’ve recorded / produced:</p>
+    <!-- ALBUM (you can rename title) -->
+    <a class="music-card" data-tags="produced engineered mixed"
+       href="https://open.spotify.com/album/1obF4uuCdfnOcGqNLsZypM"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <!-- <img src="images/album-1obF4u.jpg" alt="Album cover"> -->
+        <div class="music-cover-fallback">💿</div>
+      </div>
 
-    <iframe
-      style="border-radius:12px;margin-top:1rem;"
-      src="https://open.spotify.com/embed/track/4WIcBIljmwqmYTjpipeDVb"
-      width="100%"
-      height="80"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-  </section>
+      <div class="music-body">
+        <div class="music-title">Album Title (edit me)</div>
+        <div class="music-meta">Full Album</div>
 
-  <!-- BOOKING -->
-  <section id="booking">
-    <h2>Schedule a Lesson</h2>
-    <p>Pick a session length from the dropdown:</p>
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+        </div>
 
-    <div class="calendly-inline-widget"
-      data-url="https://calendly.com/brucehorn?hide_event_type_details=0&hide_gdpr_banner=1"
-      style="min-width:320px;height:700px;">
-    </div>
+        <div class="music-cta">Listen to album →</div>
+      </div>
+    </a>
 
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  </section>
+    <!-- TRACK (you can rename title) -->
+    <a class="music-card" data-tags="mixed engineered"
+       href="https://open.spotify.com/track/6lOacgL7ZzvyT5V4JKT3wd"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <!-- <img src="images/track-6lOacg.jpg" alt="Track cover"> -->
+        <div class="music-cover-fallback">🎵</div>
+      </div>
 
-  <!-- SOCIAL -->
-  <section class="social">
-    <h2>Follow Me</h2>
-    <div class="social-links">
-      <a href="https://instagram.com/saunadwarf" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://youtube.com/@MrBrucehorn" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://www.facebook.com/jonfettquartet/" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://werewolvesband.bandcamp.com/community" target="_blank" rel="noopener">Bandcamp</a>
-    </div>
-  </section>
+      <div class="music-body">
+        <div class="music-title">Track Title (edit me)</div>
+        <div class="music-meta">Featured Track</div>
+
+        <div class="music-badges">
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+        </div>
+
+        <div class="music-cta">Play track →</div>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="music-note">
+    Want credits, stems, or session availability? <a href="#contact">Contact me</a>.
+  </p>
+
+  <script src="music.js"></script>
+</section>
 
   <!-- CONTACT -->
   <section id="contact">
@@ -103,63 +163,78 @@
   </section>
 
   <!-- GIGS -->
-  <section id="gigs">
-    <h2>Jon Fett Quartet – Shows</h2>
+  <div class="gig-list" id="upcoming-gigs">
 
-    <h3 class="gigs-subhead">Upcoming</h3>
-    <div class="gig-list" id="upcoming-gigs">
+  <div class="gig" data-date="2026-02-27">
+    <div class="gig-date">
+      <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+        <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+        <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+        <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+      </svg>
+      <span>JFII — February 27, 2026</span>
+    </div>
+    <p>White Lake Inn — White Lake, MI • 8pm–12am</p>
+  </div>
 
-      <div class="gig" data-date="2026-02-27">
-        <div class="gig-date">
-          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
-            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
-            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
-            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
-          </svg>
-          <span>JFII — February 27, 2026</span>
-        </div>
-        <p>White Lake Inn — White Lake, MI • 8pm–12am</p>
-      </div>
+  <div class="gig" data-date="2026-02-28">
+    <div class="gig-date">
+      <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+        <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+        <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+        <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+      </svg>
+      <span>JFQ — February 28, 2026</span>
+    </div>
+    <p>Billy's Tip'n Inn — Highland, MI • 9pm–1am</p>
+  </div>
 
-      <div class="gig" data-date="2026-02-28">
-        <div class="gig-date">
-          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
-            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
-            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
-            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
-          </svg>
-          <span>JFQ — February 28, 2026</span>
-        </div>
-        <p>Billy's Tip'n Inn — Highland, MI • 9pm–1am</p>
-      </div>
+  <div class="gig" data-date="2026-03-04">
+    <div class="gig-date">
+      <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+        <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+        <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+        <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+      </svg>
+      <span>JFII — March 4, 2026</span>
+    </div>
+    <p>Scooters — Flint, MI • 6pm–9pm</p>
+  </div>
 
-      <div class="gig" data-date="2026-03-04">
-        <div class="gig-date">
-          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
-            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
-            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
-            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
-          </svg>
-          <span>JFII — March 4, 2026</span>
-        </div>
-        <p>Scooters — Flint, MI • 6pm–9pm</p>
-      </div>
+  <div class="gig" data-date="2026-03-08">
+  <div class="gig-date">
+    <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+      <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+      <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+      <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+    </svg>
+    <span>JFII — March 5, 2026</span>
+  </div>
 
-      <div class="gig" data-date="2026-05-10">
-        <div class="gig-date">
-          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
-            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
-            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
-            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
-          </svg>
-          <span>May 10, 2026</span>
-        </div>
-        <p>Private Event — Flint, MI</p>
-      </div>
+  <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+
+  <!-- Optional -->
+  <!-- <a class="ticket-btn" href="https://tickets-link.com" target="_blank" rel="noopener">Tickets</a> -->
+</div>
+  <!-- FIXED DATE: March 5 -->
+  <div class="gig" data-date="2026-03-05">
+    <div class="gig-date">
+      <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+        <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+        <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+        <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+      </svg>
+      <span>JFII — March 5, 2026</span>
+    </div>
+    <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+  </div>
+
+</div>
 
     </div>
 
@@ -167,8 +242,8 @@
     <div class="gig-list" id="past-gigs"></div>
   </section>
 
-  <!-- IMPORTANT: your repo file is named gig.js (not gigs.js) -->
-  <script src="gig.js"></script>
+  <!-- JS for moving past gigs automatically -->
+  <script src="gigs.js"></script>
 
 </body>
 </html>
