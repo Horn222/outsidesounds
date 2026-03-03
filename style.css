@@ -483,4 +483,73 @@ button, input, textarea {
   section {
     padding: 2rem 1rem;
   }
+}/* =========================
+   FEATURED JFQ BOOKING (POP!)
+========================= */
+
+#jfq-booking{
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  text-align: center;
+  border: 2px solid rgba(255,255,255,0.18);
+  background: radial-gradient(1200px 500px at 50% 0%, rgba(255,77,77,0.35), rgba(0,0,0,0.15)),
+              linear-gradient(135deg, rgba(58,28,113,0.55), rgba(215,109,119,0.35));
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+}
+
+/* soft glow ring */
+#jfq-booking::before{
+  content:"";
+  position:absolute;
+  inset:-60px;
+  background: radial-gradient(circle at 50% 10%, rgba(255,145,77,0.40), transparent 55%);
+  pointer-events:none;
+}
+
+/* headline */
+#jfq-booking h2{
+  margin: 0 0 0.75rem 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* subcopy */
+#jfq-booking .booking-intro{
+  max-width: 820px;
+  margin: 0.75rem auto 1.75rem;
+  font-size: 1.08rem;
+  opacity: 0.95;
+  line-height: 1.7;
+}
+
+/* make the button HUGE and premium */
+#jfq-booking .music-btn.primary{
+  font-size: 1.15rem;
+  padding: 16px 30px;
+  border-radius: 999px;
+  background: var(--accent-gradient);
+  border: 2px solid rgba(255,255,255,0.20);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+  transform: translateY(0);
+}
+
+#jfq-booking .music-btn.primary:hover{
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+}
+
+/* optional: tiny “featured” badge above the headline */
+#jfq-booking .featured-badge{
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.22);
 }
