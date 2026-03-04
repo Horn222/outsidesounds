@@ -527,4 +527,60 @@ header{
 #contact a{
   color: #ffd580;
   text-decoration: underline;
+}/* =========================
+   CONTACT SECTION
+========================= */
+
+#contact{
+  background: linear-gradient(135deg,#102a43,#243b55);
+  padding:4rem 2rem;
+  text-align:center;
+}
+
+.contact-intro{
+  max-width:700px;
+  margin:1rem auto 2rem;
+  opacity:.9;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.contact-card{
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:16px;
+  padding:1.5rem;
+  transition:.25s;
+}
+
+.contact-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.contact-card h3{
+  margin-bottom:.5rem;
+  color:#ffd580;
+}
+
+.contact-btn{
+  display:inline-block;
+  margin-top:1rem;
+  padding:10px 18px;
+  border-radius:30px;
+  text-decoration:none;
+  background:var(--accent);
+  color:white;
+  font-weight:bold;
+  transition:.25s;
+}
+
+.contact-btn:hover{
+  background:var(--accent-gradient);
 }
