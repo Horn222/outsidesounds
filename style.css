@@ -552,4 +552,16 @@ button, input, textarea {
   text-transform: uppercase;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.22);
+}.booking-subhead{
+  margin: 2.75rem auto 0;
+  max-width: 980px;
+  text-align: left;
+  color: #ffd580;
+  letter-spacing: 0.5px;
+}/* Center the action buttons in booking cards */
+.booking-btn{
+  display: block;
+  width: fit-content;
+  margin: 14px auto 0;   /* centers */
+  text-align: center;
 }
