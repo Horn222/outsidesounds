@@ -587,4 +587,165 @@ header{
 
 .contact-btn:hover{
   background:var(--accent-gradient);
+}/* =========================
+   JFQ FEATURED SECTION
+========================= */
+.jfq-feature {
+  margin: 2.5rem auto 0;
+  max-width: 1000px;
+  padding: 2.5rem 1.75rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(255, 77, 77, 0.28), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(255, 145, 77, 0.22), transparent 55%),
+    rgba(0,0,0,0.35);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+  text-align: center;
+}
+
+.jfq-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: #ffd580;
+}
+
+.jfq-title {
+  margin: 1rem 0 0.5rem;
+  font-size: 2.4rem;
+  letter-spacing: 0.02em;
+}
+
+.jfq-subtitle {
+  margin: 0.75rem auto 0;
+  max-width: 820px;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.jfq-actions {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.jfq-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: var(--accent-gradient);
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+}
+
+.jfq-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.5);
+  filter: brightness(1.06);
+}
+
+.jfq-btn.secondary {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+.jfq-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .jfq-grid { grid-template-columns: 1fr; }
+  .jfq-title { font-size: 2rem; }
+}
+
+.jfq-card {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.jfq-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+}
+
+.muted {
+  opacity: 0.85;
+}
+
+.jfq-photo {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  margin-top: 10px;
+}
+
+.jfq-photo-fallback code {
+  color: #ffd580;
+}
+
+/* Responsive video embeds */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 620px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.35);
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   FIX: Email buttons not hanging off edge
+   (Applies to contact buttons + other long-label buttons)
+========================= */
+.contact-btn,
+.booking-btn {
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
 }
