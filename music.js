@@ -1,6 +1,5 @@
 // music.js - simple filter for the music portfolio cards
 (function () {
-    console.log("music.js loaded", { buttons: document.querySelectorAll(".filter-btn").length });
   const grid = document.getElementById("musicGrid");
   if (!grid) return;
 
@@ -27,6 +26,5 @@
     });
   });
 
-  // Default
   applyFilter("all");
 })();
