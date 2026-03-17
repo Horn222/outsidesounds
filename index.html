@@ -50,276 +50,283 @@
   </section>
 
   <!-- MUSIC -->
-  <section id="music">
-    <h2>Listen</h2>
+  <!-- MUSIC -->
+<section id="music">
+  <h2>Listen</h2>
 
-    <p class="music-intro">
-      Selected projects I’ve produced, recorded, engineered, mixed, mastered, or performed on.
-      <br /><br />
-      The drum recordings below feature different cymbals and kits on each session to demonstrate style, versatility, and recording technique.
-      Drums are recorded directly through a Fender 4212 used as a preamp and EQ stage, then processed through rackmount compressors, limiters, and analog warmth processors.
-      Reverb is created using a custom homemade plate reverb during mixing.
-    </p>
+  <p class="music-intro">
+    Selected projects I’ve produced, recorded, engineered, mixed, mastered, or performed on.
+    <br /><br />
+    The drum recordings below feature different cymbals and kits on each session to demonstrate style, versatility, and recording technique.
+    Drums are recorded directly through a Fender 4212 used as a preamp and EQ stage, then processed through rackmount compressors, limiters, and analog warmth processors.
+    Reverb is created using a custom homemade plate reverb during mixing.
+  </p>
 
-    <div class="music-actions">
-      <a class="music-btn primary"
-         href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n"
-         target="_blank" rel="noopener">
-        Listen to Werewolves on Spotify
-      </a>
+  <div class="music-actions">
+    <a class="music-btn primary"
+       href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n"
+       target="_blank" rel="noopener">
+      Listen to Werewolves on Spotify
+    </a>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="music-filters" aria-label="Filter projects">
+    <button class="filter-btn active" data-filter="all" type="button">All</button>
+    <button class="filter-btn" data-filter="produced" type="button">Produced</button>
+    <button class="filter-btn" data-filter="engineered" type="button">Engineered</button>
+    <button class="filter-btn" data-filter="mixed" type="button">Mixed/Mastered</button>
+    <button class="filter-btn" data-filter="session" type="button">Session</button>
+    <button class="filter-btn" data-filter="live" type="button">Live</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="music-grid" id="musicGrid">
+
+    <!-- BY THE WILLOW -->
+    <a class="music-card"
+       data-tags="produced engineered"
+       href="https://open.spotify.com/artist/5XFE4g9rsY428flu9z3Qys"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <div class="music-cover-fallback">🎧</div>
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">By the Willow</div>
+        <div class="music-meta">Produced + Engineered</div>
+
+        <iframe
+          style="border-radius:12px; margin-top:10px;"
+          src="https://open.spotify.com/embed/artist/5XFE4g9rsY428flu9z3Qys"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ROCK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Rock Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1_F4JbhqQfKejywzwVisWUqrk2jQDeGpd" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
     </div>
 
-    <!-- FILTERS -->
-    <div class="music-filters" aria-label="Filter projects">
-      <button class="filter-btn active" data-filter="all" type="button">All</button>
-      <button class="filter-btn" data-filter="produced" type="button">Produced</button>
-      <button class="filter-btn" data-filter="engineered" type="button">Engineered</button>
-      <button class="filter-btn" data-filter="mixed" type="button">Mixed/Mastered</button>
-      <button class="filter-btn" data-filter="session" type="button">Session</button>
-      <button class="filter-btn" data-filter="live" type="button">Live</button>
+    <!-- POP/FUNK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Pop/Funk Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1UUtqLasxlhycrWU9jxgn1qIMdvQT2oii" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
     </div>
 
-    <!-- GRID -->
-    <div class="music-grid" id="musicGrid">
-
-      <!-- BY THE WILLOW -->
-      <a class="music-card"
-         data-tags="produced engineered"
-         href="https://open.spotify.com/artist/5XFE4g9rsY428flu9z3Qys"
-         target="_blank" rel="noopener">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🎧</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">By the Willow</div>
-          <div class="music-meta">Produced + Engineered</div>
-
-          <iframe
-            style="border-radius:12px; margin-top:10px;"
-            src="https://open.spotify.com/embed/artist/5XFE4g9rsY428flu9z3Qys"
-            width="100%"
-            height="80"
-            frameborder="0"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
-
-          <div class="music-badges">
-            <span class="badge">Produced</span>
-            <span class="badge">Engineered</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- ROCK DRUM GROOVE -->
-      <div class="music-card" data-tags="session live">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🥁</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Rock Drum Groove</div>
-          <div class="music-meta">Studio drum sample</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1_F4JbhqQfKejywzwVisWUqrk2jQDeGpd" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Session</span>
-            <span class="badge">Live</span>
-          </div>
-        </div>
+    <!-- JAZZ DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
       </div>
 
-      <!-- POP/FUNK DRUM GROOVE -->
-      <div class="music-card" data-tags="session live">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🥁</div>
-        </div>
+      <div class="music-body">
+        <div class="music-title">Jazz Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
 
-        <div class="music-body">
-          <div class="music-title">Pop/Funk Drum Groove</div>
-          <div class="music-meta">Studio drum sample</div>
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1AEUL5uJLio2tXmEgFxdmErajktaQ5ibw" type="audio/mpeg">
+        </audio>
 
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1UUtqLasxlhycrWU9jxgn1qIMdvQT2oii" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Session</span>
-            <span class="badge">Live</span>
-          </div>
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
         </div>
       </div>
-
-      <!-- JAZZ DRUM GROOVE -->
-      <div class="music-card" data-tags="session live">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🥁</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Jazz Drum Groove</div>
-          <div class="music-meta">Studio drum sample</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1AEUL5uJLio2tXmEgFxdmErajktaQ5ibw" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Session</span>
-            <span class="badge">Live</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- HARD ROCK DRUM GROOVE -->
-      <div class="music-card" data-tags="session live">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🥁</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Hard Rock Drum Groove</div>
-          <div class="music-meta">Studio drum sample</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1maW9jqgXn8goRQcxACKufc43CCIh2iTt" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Session</span>
-            <span class="badge">Live</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCED -->
-      <a class="music-card"
-         data-tags="produced engineered mixed session"
-         href="https://suburbanants1.bandcamp.com/track/flamingo-in-the-coal-mine"
-         target="_blank" rel="noopener">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🎸</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Flamingo in the Coal Mine</div>
-          <div class="music-meta">Suburban Ants • 2021 studio live band recording • low-fi punk rock</div>
-
-          <div class="music-badges">
-            <span class="badge">Produced</span>
-            <span class="badge">Engineered</span>
-            <span class="badge">Mixed/Mastered</span>
-            <span class="badge">Session Work</span>
-          </div>
-
-          <div class="music-cta">Listen on Bandcamp →</div>
-        </div>
-      </a>
-
-      <!-- ENGINEERED -->
-      <div class="music-card" data-tags="engineered produced mixed session">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🎧</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Corey Weedon</div>
-          <div class="music-meta">Produced + Engineered + Mixed/Mastered</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1Dwo42RZckvD7EzpW_NQBbn2I_nZ5FdRD" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Produced</span>
-            <span class="badge">Engineered</span>
-            <span class="badge">Mixed/Mastered</span>
-            <span class="badge">Session Work</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- MIXED / MASTERED -->
-      <div class="music-card" data-tags="mixed">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">💿</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Air People (Full Album)</div>
-          <div class="music-meta">Mixed + Mastered</div>
-
-          <iframe
-            style="border-radius:12px; margin-top:10px;"
-            src="https://open.spotify.com/embed/artist/6lmbjG08kACvIuMNo2irKD"
-            width="100%"
-            height="80"
-            frameborder="0"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
-
-          <div class="music-badges">
-            <span class="badge">Mixed</span>
-            <span class="badge">Mastered</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SESSION / COMPOSITION -->
-      <div class="music-card" data-tags="session produced mixed">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🎼</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Bruce Horn (Original Composition)</div>
-          <div class="music-meta">Written • Produced • Mixed/Mastered • Performed all instruments</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1WX1m5xrXxcbVuquw7qWwu9qgww5jvegQ" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Written</span>
-            <span class="badge">Produced</span>
-            <span class="badge">Mixed/Mastered</span>
-            <span class="badge">Session</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- LIVE -->
-      <div class="music-card" data-tags="session live">
-        <div class="music-cover" aria-hidden="true">
-          <div class="music-cover-fallback">🎥</div>
-        </div>
-
-        <div class="music-body">
-          <div class="music-title">Jon Fett Quartet — “Frankenstein”</div>
-          <div class="music-meta">Live cover of Edgar Winter Group</div>
-
-          <audio controls style="width:100%; margin-top:10px;">
-            <source src="https://drive.google.com/uc?export=download&id=1rvVyfO_OsqK7INPQVGvDALmghL1FuUNX" type="audio/mpeg">
-          </audio>
-
-          <div class="music-badges">
-            <span class="badge">Session</span>
-            <span class="badge">Live</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <p class="music-note">
-      Want credits, stems, or session availability? <a href="#contact">Contact me</a>.
-    </p>
-  </section>
+    <!-- HARD ROCK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Hard Rock Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1maW9jqgXn8goRQcxACKufc43CCIh2iTt" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCED -->
+    <a class="music-card"
+       data-tags="produced engineered mixed session"
+       href="https://suburbanants1.bandcamp.com/track/flamingo-in-the-coal-mine"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <div class="music-cover-fallback">🎸</div>
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Flamingo in the Coal Mine</div>
+        <div class="music-meta">Suburban Ants • 2021 live studio band session • low-fi punk rock</div>
+
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+
+        <div class="music-cta">Listen on Bandcamp →</div>
+      </div>
+    </a>
+
+    <!-- COREY WEEDON -->
+    <div class="music-card" data-tags="engineered produced mixed session">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/corey.jpg" alt="Corey Weedon artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Corey Weedon</div>
+        <div class="music-meta">Produced + Engineered + Mixed/Mastered</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1Dwo42RZckvD7EzpW_NQBbn2I_nZ5FdRD" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIR PEOPLE -->
+    <div class="music-card" data-tags="mixed">
+      <div class="music-cover" aria-hidden="true">
+        <div class="music-cover-fallback">💿</div>
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Air People (Full Album)</div>
+        <div class="music-meta">Mixed + Mastered</div>
+
+        <iframe
+          style="border-radius:12px; margin-top:10px;"
+          src="https://open.spotify.com/embed/artist/6lmbjG08kACvIuMNo2irKD"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+
+        <div class="music-badges">
+          <span class="badge">Mixed</span>
+          <span class="badge">Mastered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRUCE HORN ORIGINAL -->
+    <div class="music-card" data-tags="session engineered produced mixed">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/bruce.jpg" alt="Bruce Horn composition artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Bruce Horn (Original Composition)</div>
+        <div class="music-meta">Written • Produced • Engineered • Mixed/Mastered • Performed all instruments</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1WX1m5xrXxcbVuquw7qWwu9qgww5jvegQ" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Written</span>
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <div class="music-cover-fallback">🎥</div>
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Jon Fett Quartet — “Frankenstein”</div>
+        <div class="music-meta">Live cover of Edgar Winter Group</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="https://drive.google.com/uc?export=download&id=1rvVyfO_OsqK7INPQVGvDALmghL1FuUNX" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="music-note">
+    Want credits, stems, or session availability? <a href="#contact">Contact me</a>.
+  </p>
+</section>
 
   <!-- BOOKING / INQUIRIES -->
   <section id="booking">
