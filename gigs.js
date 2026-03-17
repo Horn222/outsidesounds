@@ -3,7 +3,7 @@
   const past = document.getElementById("past-gigs");
   if (!upcoming || !past) return;
 
-  const gigs = Array.from(upcoming.querySelectorAll(".gig"));
+  const gigs = Array.from(document.querySelectorAll("#upcoming-gigs .gig, #past-gigs .gig"));
 
   // Start of today in LOCAL time
   const today = new Date();
@@ -15,7 +15,9 @@
     if (parts.length !== 3) return null;
     const [y, m, day] = parts;
     if (!y || !m || !day) return null;
-    return new Date(y, m - 1, day);
+
+    const parsed = new Date(y, m - 1, day);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
   }
 
   const upcomingGigs = [];
@@ -24,18 +26,15 @@
   gigs.forEach((gig) => {
     const d = parseDate(gig);
 
-    // If date is broken, keep it in upcoming so it doesn't disappear
     if (!d) {
       upcomingGigs.push({ gig, d: null });
       return;
     }
 
-    // IMPORTANT: today stays upcoming
     if (d < today) pastGigs.push({ gig, d });
     else upcomingGigs.push({ gig, d });
   });
 
-  // Sort upcoming ascending (null dates last)
   upcomingGigs.sort((a, b) => {
     if (!a.d && !b.d) return 0;
     if (!a.d) return 1;
@@ -43,14 +42,25 @@
     return a.d.getTime() - b.d.getTime();
   });
 
-  // Sort past descending (most recent first)
   pastGigs.sort((a, b) => b.d.getTime() - a.d.getTime());
 
-  // Re-render
+  upcoming.querySelectorAll(".gig").forEach((el) => el.remove());
+  past.querySelectorAll(".gig").forEach((el) => el.remove());
+
   upcomingGigs.forEach(({ gig }) => upcoming.appendChild(gig));
   pastGigs.forEach(({ gig }) => past.appendChild(gig));
 
-  if (!past.children.length) {
-    past.innerHTML = `<p style="opacity:0.8;">No past shows listed yet.</p>`;
+  let emptyMsg = past.querySelector(".past-empty-message");
+
+  if (!pastGigs.length) {
+    if (!emptyMsg) {
+      emptyMsg = document.createElement("p");
+      emptyMsg.className = "past-empty-message";
+      emptyMsg.style.opacity = "0.8";
+      emptyMsg.textContent = "No past shows listed yet.";
+      past.appendChild(emptyMsg);
+    }
+  } else if (emptyMsg) {
+    emptyMsg.remove();
   }
 })();
