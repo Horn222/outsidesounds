@@ -1,111 +1,1080 @@
-// calendar.js - generate .ics calendar from gigs listed on the page
-(function () {
-  function pad(n) { return String(n).padStart(2, "0"); }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bruce Horn | Music & Audio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-  function formatDateICS(d) {
-    // All-day format: YYYYMMDD
-    return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
-  }
+<body>
 
-  function escapeICS(text) {
-    return String(text || "")
-      .replace(/\\/g, "\\\\")
-      .replace(/\n/g, "\\n")
-      .replace(/,/g, "\\,")
-      .replace(/;/g, "\\;");
-  }
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#music">Listen</a>
+    <a href="#booking">Let’s Make Music</a>
+    <a href="#gigs">Gigs</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  function parseGigDate(el) {
-    const raw = el.getAttribute("data-date");
-    if (!raw) return null;
-    const parts = raw.split("-").map(Number);
-    if (parts.length !== 3) return null;
-    const [y, m, day] = parts;
-    if (!y || !m || !day) return null;
-    return new Date(y, m - 1, day); // local date
-  }
+  <!-- HEADER -->
+  <header>
+    <div class="hero-text">
+      <h1>Bruce Horn</h1>
+      <p class="hero-tagline">Music • Production • Lessons • Live Performance</p>
+    </div>
+  </header>
 
-  function textFromGig(el) {
-    // Summary line: prefer the date label span, then fallback to text
-    const label = el.querySelector(".gig-date span");
-    const p = el.querySelector("p");
-    const title = (label?.textContent || "Jon Fett Quartet Show").trim();
-    const details = (p?.textContent || "").trim();
-    return { title, details };
-  }
+  <!-- SERVICES -->
+  <section id="services">
+    <h2>Services</h2>
+    <p>
+      Musician • Teacher • Producer • Recording Engineer • Session Musician • Booking
+    </p>
+  </section>
 
-  function collectGigs() {
-    // Collect gigs from both upcoming and past lists (after gigs.js may have moved them)
-    const nodes = Array.from(document.querySelectorAll("#gigs .gig"));
-    return nodes
-      .map(el => {
-        const d = parseGigDate(el);
-        if (!d) return null;
-        const { title, details } = textFromGig(el);
-        return { d, title, details };
-      })
-      .filter(Boolean)
-      .sort((a, b) => a.d.getTime() - b.d.getTime());
-  }
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I’m a lifelong professional musician, producer, and certified K–12 music educator with 30+ years of experience across live performance, recording, composition, and media production. A true multi-instrumentalist, I specialize in percussion, strings, keyboards, and vocals—with the ability to adapt authentically to any genre with any instrument.
+      <br /><br />
+      I’ve performed professionally since age 11 and shared stages with Overkill, The Suicide Machines, The Gories, Grand Funk Railroad, Dave Brubeck, The Jon Spencer Blues Explosion, Starcrawler, Andy Narell, and more.
+      <br /><br />
+      In the studio, I’ve worked with Steve Albini and spent decades recording, engineering, and producing—from analog tape to modern DAWs including Logic Pro X, Pro Tools, and Ableton Live.
+      <br /><br />
+      Currently accepting select projects and students throughout the Tri-County Michigan area.
+    </p>
+  </section>
 
-  function buildICS(gigs) {
-    const nowUTC = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
-    const lines = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Outside Sounds//JFQ Gigs//EN",
-      "CALSCALE:GREGORIAN",
-      "METHOD:PUBLISH"
-    ];
+<!-- MUSIC -->
+<section id="music">
+  <h2>Listen</h2>
 
-    gigs.forEach((g, idx) => {
-      // All-day event; DTEND is next day
-      const dtStart = formatDateICS(g.d);
-      const next = new Date(g.d);
-      next.setDate(next.getDate() + 1);
-      const dtEnd = formatDateICS(next);
+  <p class="music-intro">
+    Selected projects I’ve produced, recorded, engineered, mixed, mastered, or performed on.
+    <br /><br />
+    The drum recordings below feature different kits and cymbals on each session to demonstrate style, versatility, and recording technique.
+    Drums are recorded directly through a Fender 4212 mixing console preamping mics and EQ-then processed through rackmount compressors, limiters, and analog warmth processors.
+    Reverb is created using a custom homemade plate reverb during mixing. Kits include Yamaha Maple Custom TMP2F4, Gretch Catalina Club and 1960's Starlite. Gear lists upon request for recording and session work.
+  </p>
 
-      const uid = `jfq-${dtStart}-${idx}@outsidesounds`;
+  <div class="music-actions">
+    <a class="music-btn primary"
+       href="https://open.spotify.com/artist/7mx7pUa6EK9clGHE2exY0n"
+       target="_blank" rel="noopener">
+      Listen to Werewolves on Spotify
+    </a>
+  </div>
 
-      lines.push("BEGIN:VEVENT");
-      lines.push(`UID:${uid}`);
-      lines.push(`DTSTAMP:${nowUTC}`);
-      lines.push(`DTSTART;VALUE=DATE:${dtStart}`);
-      lines.push(`DTEND;VALUE=DATE:${dtEnd}`);
-      lines.push(`SUMMARY:${escapeICS(g.title)}`);
-      if (g.details) lines.push(`DESCRIPTION:${escapeICS(g.details)}`);
-      lines.push("END:VEVENT");
-    });
+  <!-- FILTERS -->
+  <div class="music-filters" aria-label="Filter projects">
+    <button class="filter-btn active" data-filter="all" type="button">All</button>
+    <button class="filter-btn" data-filter="produced" type="button">Produced</button>
+    <button class="filter-btn" data-filter="engineered" type="button">Engineered</button>
+    <button class="filter-btn" data-filter="mixed" type="button">Mixed/Mastered</button>
+    <button class="filter-btn" data-filter="session" type="button">Session</button>
+    <button class="filter-btn" data-filter="live" type="button">Live</button>
+  </div>
 
-    lines.push("END:VCALENDAR");
-    return lines.join("\r\n");
-  }
+  <!-- GRID -->
+  <div class="music-grid" id="musicGrid">
 
-  function downloadICS(filename, content) {
-    const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+    <!-- BY THE WILLOW -->
+    <a class="music-card"
+       data-tags="produced engineered"
+       href="https://open.spotify.com/artist/5XFE4g9rsY428flu9z3Qys"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/willow.jpg" alt="By The Willow composition artwork">
+      </div>
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+      <div class="music-body">
+        <div class="music-title">By the Willow</div>
+        <div class="music-meta">Produced + Engineered</div>
 
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
+        <iframe
+          style="border-radius:12px; margin-top:10px;"
+          src="https://open.spotify.com/embed/artist/5XFE4g9rsY428flu9z3Qys"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
 
-  const btn = document.getElementById("download-ics");
-  if (!btn) return;
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+        </div>
+      </div>
+    </a>
 
-  btn.addEventListener("click", () => {
-    const gigs = collectGigs();
-    if (!gigs.length) {
-      alert("No gigs found to export yet.");
-      return;
-    }
-    const ics = buildICS(gigs);
-    downloadICS("JFQ_Gigs.ics", ics);
-  });
-})();
+    <!-- ROCK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Rock Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/classic-rock.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POP/FUNK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Pop/Funk Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/funk-pop.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAZZ DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Jazz Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/jazz-style.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HARD ROCK DRUM GROOVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/drum.jpg" alt="Drum sample artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Hard Rock Drum Groove</div>
+        <div class="music-meta">Studio drum sample</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/hard-rock.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCED -->
+    <a class="music-card"
+       data-tags="produced engineered mixed session"
+       href="https://suburbanants1.bandcamp.com/track/flamingo-in-the-coal-mine"
+       target="_blank" rel="noopener">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/subants.jpg" alt="Suburban Ants composition artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Flamingo in the Coal Mine</div>
+        <div class="music-meta">Suburban Ants • 2021 live studio band session • low-fi punk rock</div>
+
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+
+        <div class="music-cta">Listen on Bandcamp →</div>
+      </div>
+    </a>
+
+    <!-- COREY WEEDON -->
+    <div class="music-card" data-tags="engineered produced mixed session">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/corey.jpg" alt="Corey Weedon artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Corey Weedon</div>
+        <div class="music-meta">Produced + Engineered + Mixed/Mastered</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/future-teeth.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIR PEOPLE -->
+    <div class="music-card" data-tags="mixed">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/air-people.jpg" alt="Air People composition artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Air People (Full Album)</div>
+        <div class="music-meta">Mixed + Mastered</div>
+
+        <iframe
+          style="border-radius:12px; margin-top:10px;"
+          src="https://open.spotify.com/embed/artist/6lmbjG08kACvIuMNo2irKD"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+
+        <div class="music-badges">
+          <span class="badge">Mixed</span>
+          <span class="badge">Mastered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRUCE HORN ORIGINAL -->
+    <div class="music-card" data-tags="session engineered produced mixed">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/bruce.jpg" alt="Bruce Horn composition artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Bruce Horn (Original Composition)</div>
+        <div class="music-meta">Written • Produced • Engineered • Mixed/Mastered • Performed all instruments</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/transitions.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Written</span>
+          <span class="badge">Produced</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Mixed/Mastered</span>
+          <span class="badge">Session</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE -->
+    <div class="music-card" data-tags="session engineered live">
+      <div class="music-cover" aria-hidden="true">
+        <img src="images/wtfijf.jpg" alt="Jon Fett Quartet artwork">
+      </div>
+
+      <div class="music-body">
+        <div class="music-title">Jon Fett Quartet — “Frankenstein”</div>
+        <div class="music-meta">Live cover of Edgar Winter Group</div>
+
+        <audio controls style="width:100%; margin-top:10px;">
+          <source src="audio/jon-frankenstein.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-badges">
+          <span class="badge">Session</span>
+          <span class="badge">Engineered</span>
+          <span class="badge">Live</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="music-note">
+    Want credits, stems, or session availability? <a href="#contact">Contact me</a>.
+  </p>
+</section>
+
+  <!-- BOOKING / INQUIRIES -->
+  <section id="booking">
+    <h2>Let’s Make Music!</h2>
+    <p class="booking-intro">
+      Pick a category below. Each button opens an email draft with the details pre-filled so you can book quickly.
+    </p>
+
+    <!-- LESSONS -->
+    <h3 class="booking-subhead">Lessons</h3>
+    <div class="booking-grid">
+
+      <div class="booking-card">
+        <h3>Half-hour Lesson</h3>
+        <p class="booking-price">$45</p>
+        <a class="booking-btn"
+   href="mailto:2bruce2horn2@gmail.com?subject=Lesson%20Request%20-%2030%20Minutes%20(%2445)&body=Hi%20Bruce%2C%0A%0AI%27d%20like%20to%20book%20a%2030-minute%20lesson%20(%2445).%0A%0A---%0AAVAILABILITY%20(WEEKLY)%0A%0A%5B%20%5D%20Mon%204pm%E2%80%9310pm%0A%5B%20%5D%20Tue%204pm%E2%80%9310pm%0A%5B%20%5D%20Wed%20Not%20available%0A%5B%20%5D%20Thu%204pm%E2%80%9310pm%20(every%20other%20week%2C%20starting%20next%20week)%0A%5B%20%5D%20Fri%20Not%20available%0A%5B%20%5D%20Sat%209am%E2%80%935pm%0A%5B%20%5D%20Sun%209am%E2%80%934pm%0A---%0A%0APlease%20circle%20(or%20write)%20your%20top%203%20choices%3A%0A1)%20%0A2)%20%0A3)%20%0A%0AStudent%20age%2Flevel%3A%20%0AInstrument%2Ffocus%3A%20%0AIn-person%20or%20Zoom%3A%20%0A%0ANote%3A%20In-person%20lessons%20are%20at%20my%20home%20studio%20(location%20shared%20after%20confirmation).%0A%0AThanks%2C%0A">
+  Request
+</a>
+      </div>
+
+      <div class="booking-card">
+        <h3>1-hour Lesson</h3>
+        <p class="booking-price">$70</p>
+        <a class="booking-btn"
+   href="mailto:2bruce2horn2@gmail.com?subject=Lesson%20Request%20-%2060%20Minutes%20(%2470)&body=Hi%20Bruce%2C%0A%0AI%27d%20like%20to%20book%20a%2060-minute%20lesson%20(%2470).%0A%0A---%0AAVAILABILITY%20(WEEKLY)%0A%0A%5B%20%5D%20Mon%204pm%E2%80%9310pm%0A%5B%20%5D%20Tue%204pm%E2%80%9310pm%0A%5B%20%5D%20Wed%20Not%20available%0A%5B%20%5D%20Thu%204pm%E2%80%9310pm%20(every%20other%20week%2C%20starting%20next%20week)%0A%5B%20%5D%20Fri%20Not%20available%0A%5B%20%5D%20Sat%209am%E2%80%935pm%0A%5B%20%5D%20Sun%209am%E2%80%934pm%0A---%0A%0APlease%20circle%20(or%20write)%20your%20top%203%20choices%3A%0A1)%20%0A2)%20%0A3)%20%0A%0AStudent%20age%2Flevel%3A%20%0AInstrument%2Ffocus%3A%20%0AIn-person%20or%20Zoom%3A%20%0A%0ANote%3A%20In-person%20lessons%20are%20at%20my%20home%20studio%20(location%20shared%20after%20confirmation).%0A%0AThanks%2C%0A">
+  Request
+</a>
+      </div>
+
+      <div class="booking-card">
+        <h3>Full Band Master Class</h3>
+        <p class="booking-price">$120</p>
+        <a class="booking-btn"
+           href="mailto:2bruce2horn2@gmail.com?subject=Master%20Class%20Request%20-%20Full%20Band%20(%24120)&body=Hi%20Bruce%2C%0A%0AI%27d%20like%20to%20book%20a%20Full%20Band%20Master%20Class%20(%24120).%0A%0ABand%20name%3A%20%0AGroup%20size%3A%20%0AGenre%2Fstyle%3A%20%0APreferred%20dates%2Ftimes%20(top%203)%3A%0A1)%20%0A2)%20%0A3)%20%0A%0ALocation%20(or%20rehearsal%20space)%3A%20%0AWhat%20are%20you%20working%20on%3F%20(songs%2C%20tightness%2C%20tone%2C%20arranging%2C%20stagecraft)%3A%20%0A%0AThanks%2C%0A">
+          Request
+        </a>
+      </div>
+
+    </div>
+
+    <!-- RECORDING -->
+    <h3 class="booking-subhead">Recording</h3>
+    <div class="booking-grid">
+
+      <div class="booking-card">
+        <h3>Recording / Engineering</h3>
+        <p class="booking-price">$50/hr</p>
+        <a class="booking-btn"
+           href="mailto:outsidesoundstudios@gmail.com?subject=Recording%2FEngineering%20Request%20(%2450%2Fhr)&body=Hi%20Bruce%2C%0A%0AI%27d%20like%20to%20book%20Recording%2FEngineering%20(%2450%2Fhr).%0A%0AProject%20type%3A%20(voice%2C%20band%2C%20overdubs%2C%20mix%2C%20edit%2C%20etc.)%0AEstimated%20hours%3A%20%0APreferred%20dates%2Ftimes%20(top%203)%3A%0A1)%20%0A2)%20%0A3)%20%0A%0AReference%20tracks%2Flinks%3A%20%0A%0ANote%3A%20Sessions%20are%20at%20my%20home%20studio%20(location%20shared%20after%20confirmation).%0A%0AThanks%2C%0A">
+          Request
+        </a>
+      </div>
+
+      <div class="booking-card">
+        <h3>Producing</h3>
+        <p class="booking-price">$75/hr</p>
+        <a class="booking-btn"
+           href="mailto:outsidesoundstudios@gmail.com?subject=Producing%20Inquiry%20(%2475%2Fhr)&body=Hi%20Bruce%2C%0A%0AI%27m%20interested%20in%20producing%20(%2475%2Fhr).%0A%0AArtist%2Fproject%3A%20%0AGenre(s)%3A%20%0AGoals%3A%20(single%2FEP%2Falbum%2C%20release%20plan%2C%20sound%20direction)%0ATimeline%3A%20%0AReference%20tracks%2Flinks%3A%20%0A%0AThanks%2C%0A">
+          Request
+        </a>
+      </div>
+
+    </div>
+
+    <!-- SESSION + WRITING -->
+    <h3 class="booking-subhead">Session Work & Writing</h3>
+    <div class="booking-grid">
+
+      <div class="booking-card">
+        <h3>Session Work</h3>
+        <p class="booking-price">Inquire</p>
+        <a class="booking-btn"
+           href="mailto:2bruce2horn2@gmail.com?subject=Session%20Work%20Inquiry&body=Hi%20Bruce%2C%0A%0AI%27m%20interested%20in%20session%20work.%0A%0AGenre(s)%3A%20%0AProject%20links%2Frefs%3A%20%0AInstrument%20needed%3A%20%0ADates%20%26%20deadline%3A%20%0ABudget%3A%20%0A%0AIf%20you%20have%20charts%2Fstems%2Ftempo%20map%2C%20please%20share.%0A%0AThanks%2C%0A">
+          Inquire
+        </a>
+      </div>
+
+      <div class="booking-card">
+        <h3>Composition & Transcriptions</h3>
+        <p class="booking-price">$60–$90 / audio hr</p>
+        <a class="booking-btn"
+           href="mailto:2bruce2horn2@gmail.com?subject=Composition%20%26%20Transcription%20Inquiry&body=Hi%20Bruce%2C%0A%0AI%27m%20interested%20in%20composition%20and%2For%20transcription.%0A%0AType%3A%20(composition%2C%20chart%2C%20transcription)%0ALength%2Fscope%3A%20%0AAudio%20link%20(if%20transcribing)%3A%20%0ADeadline%3A%20%0AStyle%2Fgenre%3A%20%0A%0AThanks%2C%0A">
+          Inquire
+        </a>
+      </div>
+
+    </div>
+
+    <!-- BOOKING -->
+    <h3 class="booking-subhead">Booking</h3>
+    <div class="booking-grid">
+
+      <div class="booking-card">
+        <h3>Booking Help (Tri-County Venues)</h3>
+        <p class="booking-price">10%</p>
+        <a class="booking-btn"
+           href="mailto:outsidesoundstudios@gmail.com?subject=Booking%20Help%20Inquiry%20(Tri-County%20Venues%2010%25)&body=Hi%20Bruce%2C%0A%0AI%27d%20like%20help%20with%20booking%20for%20local%20venues%20(10%25).%0A%0AArtist%2Fband%20name%3A%20%0AStyle%2Fgenre%3A%20%0ACovers%2C%20originals%2C%20or%20both%3A%20%0ALinks%20(listen%2Fwatch)%3A%20%0ATarget%20venues%2Fareas%3A%20%0APreferred%20dates%3A%20%0A%0AThanks%2C%0A">
+          Inquire
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED JFQ BOOKING -->
+  <section id="jf-booking" class="jf-feature">
+    <div class="jf-pill">FEATURED BOOKING</div>
+    <h2 class="jf-title">BOOK THE JON FETT QUARTET</h2>
+    <p class="jf-copy">
+      High-energy classic rock covers for bars, restaurants, private parties, corporate events, weddings, and festivals.
+      Tell us what you’re planning and we’ll respond with availability, options, and a clean quote.
+    </p>
+
+    <a class="jf-btn"
+       href="mailto:jonfettquartet@gmail.com?subject=JFQ%20Booking%20Request&body=Hi%20JFQ%2C%0A%0AI%27d%20like%20to%20book%20the%20Jon%20Fett%20Quartet.%0A%0AEvent%20type%3A%20(bar%2C%20festival%2C%20private%20party%2C%20wedding%2C%20corporate%2C%20etc.)%0AVenue%20name%20%2B%20address%3A%20%0ADate%3A%20%0ATime%20window%3A%20%0ASet%20length(s)%3A%20(1x90%2C%202x60%2C%203x45%2C%20etc.)%0AIndoor%2Foutdoor%3A%20%0ASound%20provided%20by%3A%20(venue%2Fyou%2Fband)%0ABudget%2Fguarantee%3A%20%0AContact%20name%20%2B%20phone%3A%20%0A%0ANotes%3A%20%0A%0AThanks%2C%0A">
+      Request JFQ Booking
+    </a>
+  </section>
+
+  <!-- GIGS -->
+  <section id="gigs">
+    <h2>Jon Fett Quartet – Shows</h2>
+
+    <h3 class="gigs-subhead">Upcoming</h3>
+    <div class="gig-list" id="upcoming-gigs">
+
+      <div class="gig" data-date="2026-02-27">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — February 27, 2026</span>
+        </div>
+        <p>White Lake Inn — White Lake, MI • 8pm–12am</p>
+      </div>
+
+      <div class="gig" data-date="2026-02-28">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFQ — February 28, 2026</span>
+        </div>
+        <p>Billy's Tip'n Inn — Highland, MI • 9pm–1am</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-01">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 1, 2026</span>
+        </div>
+        <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-04">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 4, 2026</span>
+        </div>
+        <p>Scooters — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-05">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 5, 2026</span>
+        </div>
+        <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-07">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFQ — March 7, 2026</span>
+        </div>
+        <p>Sherman's Lounge — Davisburg, MI • 9pm–1am</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-08">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 8, 2026</span>
+        </div>
+        <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-18">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 18, 2026</span>
+        </div>
+        <p>Scooters — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-19">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 19, 2026</span>
+        </div>
+        <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-21">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFQ — March 21, 2026</span>
+        </div>
+        <p>Montrose Pub — Montrose, MI • 9pm–1am</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-26">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 26, 2026</span>
+        </div>
+        <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-03-29">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — March 29, 2026</span>
+        </div>
+        <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+      </div>
+
+      <div class="gig" data-date="2026-04-01">
+        <div class="gig-date">
+          <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+            <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+            <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+            <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+          </svg>
+          <span>JFII — April 1, 2026</span>
+        </div>
+        <p>Scooters — Flint, MI • 6pm–9pm</p>
+      </div>
+
+       <div class="gig" data-date="2026-04-02">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 2, 2026</span>
+      </div>
+      <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-05">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — April 5, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-08">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 8, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-10">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — April 10, 2026</span>
+      </div>
+      <p>Scooters Bar &amp; Grill — Flint, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-11">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — April 11, 2026</span>
+      </div>
+      <p>Taylor's Tavern — Holly, MI • 9pm–1am</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-12">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 12, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-15">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 15, 2026</span>
+      </div>
+      <p>Scooters Bar &amp; Grill — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-16">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 16, 2026</span>
+      </div>
+      <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-17">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 17, 2026</span>
+      </div>
+      <p>Amy's Downtown Reservoir — Clarkston, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-18">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 18, 2026</span>
+      </div>
+      <p>Montrose Pub — Montrose, MI • 9pm–1am</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-19">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 19, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-22">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 22, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions — Songwriter Spotlight) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-26">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 26, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-29">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 29, 2026</span>
+      </div>
+      <p>Scooters Bar &amp; Grill — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-04-30">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — April 30, 2026</span>
+      </div>
+      <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-03">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 3, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-06">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 6, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions — Blues Revue) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-09">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — May 9, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Bruce's Birthday Party) — Flint, MI • 9pm–1am</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-10">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 10, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-13">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — May 13, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions — Jazz Under the Dive Light) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-14">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 14, 2026</span>
+      </div>
+      <p>Springfield Inn — Davisburg, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-17">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 17, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-20">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — May 20, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions — Rock &amp; Roots Night) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-21">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 21, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-23">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — May 23, 2026</span>
+      </div>
+      <p>Taylor's Tavern — Holly, MI • 9pm–1am</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-24">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 24, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-27">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — May 27, 2026</span>
+      </div>
+      <p>Sherman's Lounge (Sound Sessions — Songwriter Spotlight) — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-05-31">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — May 31, 2026</span>
+      </div>
+      <p>Sherman's Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-06-06">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFII — June 6, 2026</span>
+      </div>
+      <p>Tenacity Brewing — Flint, MI • 7pm–10pm</p>
+    </div>
+
+    <div class="gig" data-date="2026-06-13">
+      <div class="gig-date">
+        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="3" stroke-width="2"></rect>
+          <line x1="8" y1="2.5" x2="8" y2="6" stroke-width="2"></line>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke-width="2"></line>
+          <line x1="3" y1="9" x2="21" y2="9" stroke-width="2"></line>
+        </svg>
+        <span>JFQ — June 13, 2026</span>
+      </div>
+      <p>Scooters Bar &amp; Grill — Flint, MI • 8pm–12am</p>
+    </div>
+    </div>
+<div class="gig-actions">
+  <button class="gig-btn" id="download-ics" type="button">
+    Download Calendar
+  </button>
+</div>
+    <h3 class="gigs-subhead" style="margin-top:3rem;">Past Shows</h3>
+    <div class="gig-list" id="past-gigs"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+
+    <p class="contact-intro">
+      The fastest way to reach me is by email. Please use the address that best matches what you're looking for:
+    </p>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <h3>Lessons / Master Classes</h3>
+        <p>Private lessons, group lessons, band coaching, and master classes.</p>
+        <a class="contact-btn"
+           href="mailto:2bruce2horn2@gmail.com?subject=Lesson%20or%20Master%20Class%20Inquiry">
+          2bruce2horn2@gmail.com
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <h3>Session Work / Composition</h3>
+        <p>Session playing, writing, arranging, transcription, or collaboration.</p>
+        <a class="contact-btn"
+           href="mailto:2bruce2horn2@gmail.com?subject=Session%20Work%20or%20Composition%20Inquiry">
+          2bruce2horn2@gmail.com
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <h3>Recording / Production</h3>
+        <p>Studio recording, engineering, producing, mixing, and music production.</p>
+        <a class="contact-btn"
+           href="mailto:outsidesoundstudios@gmail.com?subject=Recording%20or%20Production%20Inquiry">
+          outsidesoundstudios@gmail.com
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <h3>Jon Fett Quartet Booking</h3>
+        <p>Book the band for bars, restaurants, private events, festivals, weddings, and corporate events.</p>
+        <a class="contact-btn"
+           href="mailto:jonfettquartet@gmail.com?subject=JFQ%20Booking%20Inquiry">
+          jonfettquartet@gmail.com
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCRIPTS -->
+  <!-- SCRIPTS -->
+<script src="music.js"></script>
+<script src="gigs.js"></script>
+<script src="calendar.js"></script>
+</body>
+</html>
