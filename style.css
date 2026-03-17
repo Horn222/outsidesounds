@@ -315,6 +315,12 @@ header{
   text-decoration: underline;
 }
 
+.music-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 /* Hide cards when filtered */
 .music-card.is-hidden{ display: none !important; }
 
