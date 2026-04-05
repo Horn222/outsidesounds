@@ -632,130 +632,284 @@
 
  <!-- GIGS -->
 <section id="gigs">
-
-  <h3 class="booking-subhead">Live Shows</h3>
+  <h2>Live Shows</h2>
 
   <p class="booking-intro">
-    Updated performance schedule. Come hang 🎶
+    Updated performance calendar for Jon Fett Quartet and JFII.
   </p>
 
-  <div class="booking-grid">
+  <div class="gig-actions">
+    <button class="gig-btn" id="download-ics" type="button">
+      Download Calendar
+    </button>
 
-    <!-- SHERMAN'S LOUNGE - JFII -->
-    <div class="booking-card">
-      <h3>Sherman's Lounge</h3>
-      <p class="booking-note">Flint, MI • 6pm–9pm</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">
-        Apr 12, 19, 26<br>
-        May 3, 10, 17, 24<br>
-        June 7, 14, 21, 28
-      </p>
+    <a class="gig-btn secondary"
+       href="https://calendar.google.com/calendar/r?cid=https://horn222.github.io/outsidesounds/jfq_jfii_2026_gigs.ics"
+       target="_blank" rel="noopener">
+      Subscribe in Google Calendar
+    </a>
+  </div>
+
+  <h3 class="gigs-subhead">This Week</h3>
+  <div class="gig-list" id="this-week-gigs">
+    <p class="gig-empty">No shows scheduled this week.</p>
+  </div>
+
+  <h3 class="gigs-subhead">Jon Fett Quartet</h3>
+  <div class="gig-list band-group" id="jfq-gigs">
+
+    <div class="gig jfq" data-date="2026-04-10">
+      <div class="gig-date"><span>April 10, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 8pm–12am</p>
     </div>
 
-    <!-- SHERMAN'S LOUNGE - JFQ -->
-    <div class="booking-card">
-      <h3>Sherman's Lounge</h3>
-      <p class="booking-note">Flint, MI • 6pm–9pm</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">
-        May 9 • July 11 • Sept 5 • Nov 20
-      </p>
+    <div class="gig jfq" data-date="2026-04-11">
+      <div class="gig-date"><span>April 11, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Taylor’s Tavern — Holly, MI • 9pm–1am</p>
     </div>
 
-    <!-- CORNER BAR -->
-    <div class="booking-card">
-      <h3>Corner Bar</h3>
-      <p class="booking-note">Fenton, MI • 8pm–12am</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">Nov 25</p>
+    <div class="gig jfq" data-date="2026-04-17">
+      <div class="gig-date"><span>April 17, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Amy’s Downtown Reservoir — Columbiaville, MI • 7pm–11pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Corner Bar</h3>
-      <p class="booking-note">Fenton, MI • 8pm–12am</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">
-        June 20 • Aug 8 • Sept 19 • Oct 24 • Dec 26
-      </p>
+    <div class="gig jfq" data-date="2026-04-18">
+      <div class="gig-date"><span>April 18, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • The Montrose Pub — Montrose, MI • 9pm–1am</p>
     </div>
 
-    <!-- SCOOTERS -->
-    <div class="booking-card">
-      <h3>Scooter’s Bar & Grill</h3>
-      <p class="booking-note">Flint, MI • 6pm–9pm</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">Apr 15 • Apr 29</p>
+    <div class="gig jfq" data-date="2026-05-09">
+      <div class="gig-date"><span>May 9, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Scooter’s Bar & Grill</h3>
-      <p class="booking-note">Flint, MI • 8pm–12am</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">
-        Apr 10 • May 23 • June 13 • Oct 2 • Dec 4
-      </p>
+    <div class="gig jfq" data-date="2026-05-15">
+      <div class="gig-date"><span>May 15, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Highland Elementary — Highland, MI • 5pm–8:30pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Scooter’s Bike Night</h3>
-      <p class="booking-note">Flint, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">June 17 • Aug 5</p>
+    <div class="gig jfq" data-date="2026-05-23">
+      <div class="gig-date"><span>May 23, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 8pm–12am</p>
     </div>
 
-    <!-- FEATURE SHOWS -->
-    <div class="booking-card">
-      <h3>Willowbrook Golf Club</h3>
-      <p class="booking-note">Byron, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">June 6 • July 25 • Aug 29</p>
+    <div class="gig jfq" data-date="2026-06-05">
+      <div class="gig-date"><span>June 5, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Market Tap 10th Anniversary — Flint, MI • 7pm–10pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Tenacity Brewing Co.</h3>
-      <p class="booking-note">Flint, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">June 26</p>
+    <div class="gig jfq" data-date="2026-06-06">
+      <div class="gig-date"><span>June 6, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Willowbrook Golf Club — Byron, MI • 7pm–11pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Tenacity Brewing Co.</h3>
-      <p class="booking-note">Flint, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">July 18</p>
+    <div class="gig jfq" data-date="2026-06-13">
+      <div class="gig-date"><span>June 13, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 8pm–12am</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Rosebush 4th of July</h3>
-      <p class="booking-note">Rosebush, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">July 4</p>
+    <div class="gig jfq" data-date="2026-06-17">
+      <div class="gig-date"><span>June 17, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bike Night — Flint, MI • 7pm–11pm</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Sand Lake Festival</h3>
-      <p class="booking-note">Sand Lake, MI • 7pm–12am</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">Aug 14 & 15</p>
+    <div class="gig jfq" data-date="2026-06-20">
+      <div class="gig-date"><span>June 20, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
     </div>
 
-    <div class="booking-card">
-      <h3>Runyon Lake Island Show</h3>
-      <p class="booking-note">Fenton, MI • 7pm–11pm</p>
-      <p class="booking-note"><strong>JFII</strong></p>
-      <p class="booking-note">Aug 22</p>
+    <div class="gig jfq" data-date="2026-06-27">
+      <div class="gig-date"><span>June 27, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Invite Only — TBA, MI • Time TBA</p>
     </div>
 
-    <!-- PRIVATE -->
-    <div class="booking-card">
-      <h3>Private Events</h3>
-      <p class="booking-note">Invite Only • TBA</p>
-      <p class="booking-note"><strong>Jon Fett Quartet</strong></p>
-      <p class="booking-note">
-        June 27 • Oct 3 • Oct 31
-      </p>
+    <div class="gig jfq" data-date="2026-07-04">
+      <div class="gig-date"><span>July 4, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Rosebush 4th of July Celebration — Rosebush, MI • 7pm–11pm</p>
     </div>
+
+    <div class="gig jfq" data-date="2026-07-11">
+      <div class="gig-date"><span>July 11, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-07-17">
+      <div class="gig-date"><span>July 17, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Spring Meadows Country Club — Linden, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-07-18">
+      <div class="gig-date"><span>July 18, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Tenacity Brewing Co. — Flint, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-07-25">
+      <div class="gig-date"><span>July 25, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Willowbrook Golf Club — Byron, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-08-05">
+      <div class="gig-date"><span>August 5, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bike Night — Flint, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-08-08">
+      <div class="gig-date"><span>August 8, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-08-29">
+      <div class="gig-date"><span>August 29, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Willowbrook Golf Club — Byron, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-09-05">
+      <div class="gig-date"><span>September 5, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-09-19">
+      <div class="gig-date"><span>September 19, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-09-26">
+      <div class="gig-date"><span>September 26, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Taylor’s Tavern — Holly, MI • 9pm–1am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-10-02">
+      <div class="gig-date"><span>October 2, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-10-03">
+      <div class="gig-date"><span>October 3, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Invite Only — TBA, MI • Time TBA</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-10-24">
+      <div class="gig-date"><span>October 24, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-10-31">
+      <div class="gig-date"><span>October 31, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Invite Only — TBA, MI • Time TBA</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-11-20">
+      <div class="gig-date"><span>November 20, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-12-04">
+      <div class="gig-date"><span>December 4, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 8pm–12am</p>
+    </div>
+
+    <div class="gig jfq" data-date="2026-12-26">
+      <div class="gig-date"><span>December 26, 2026</span></div>
+      <p><strong>Jon Fett Quartet</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
+    </div>
+
+  </div>
+
+  <h3 class="gigs-subhead">JFII</h3>
+  <div class="gig-list band-group" id="jfii-gigs">
+
+    <div class="gig jfii" data-date="2026-04-12">
+      <div class="gig-date"><span>April 12, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-04-15">
+      <div class="gig-date"><span>April 15, 2026</span></div>
+      <p><strong>JFII</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-04-19">
+      <div class="gig-date"><span>April 19, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-04-26">
+      <div class="gig-date"><span>April 26, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-04-29">
+      <div class="gig-date"><span>April 29, 2026</span></div>
+      <p><strong>JFII</strong> • Scooter’s Bar &amp; Grill — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-05-03">
+      <div class="gig-date"><span>May 3, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-05-10">
+      <div class="gig-date"><span>May 10, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-05-17">
+      <div class="gig-date"><span>May 17, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-05-24">
+      <div class="gig-date"><span>May 24, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-06-07">
+      <div class="gig-date"><span>June 7, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-06-14">
+      <div class="gig-date"><span>June 14, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-06-21">
+      <div class="gig-date"><span>June 21, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-06-26">
+      <div class="gig-date"><span>June 26, 2026</span></div>
+      <p><strong>JFII</strong> • Tenacity Brewing Co. — Flint, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-06-28">
+      <div class="gig-date"><span>June 28, 2026</span></div>
+      <p><strong>JFII</strong> • Sherman’s Lounge — Flint, MI • 6pm–9pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-08-14">
+      <div class="gig-date"><span>August 14, 2026</span></div>
+      <p><strong>JFII</strong> • Sand Lake Festival — Sand Lake, MI • 7pm–12am</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-08-15">
+      <div class="gig-date"><span>August 15, 2026</span></div>
+      <p><strong>JFII</strong> • Sand Lake Festival — Sand Lake, MI • 7pm–12am</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-08-22">
+      <div class="gig-date"><span>August 22, 2026</span></div>
+      <p><strong>JFII</strong> • Runyon Lake Island Show — Fenton, MI • 7pm–11pm</p>
+    </div>
+
+    <div class="gig jfii" data-date="2026-11-25">
+      <div class="gig-date"><span>November 25, 2026</span></div>
+      <p><strong>JFII</strong> • Corner Bar — Fenton, MI • 8pm–12am</p>
+    </div>
+
+  </div>
+</section>
 
   </div>
 
