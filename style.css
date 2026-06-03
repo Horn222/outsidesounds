@@ -815,3 +815,90 @@ header{
 #gigs .gig-empty {
   opacity: 0.8;
 }
+#gigs .gig-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 1rem 0 2.5rem;
+}
+
+#gigs .gig-btn {
+  display: inline-block;
+  padding: 0.85rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+#gigs .gig-btn.secondary {
+  opacity: 0.92;
+}
+
+#gigs .gig-list {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+#gigs .gig {
+  position: relative;
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.045);
+  overflow: hidden;
+}
+
+#gigs .gig::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+}
+
+#gigs .gig.jfq::before {
+  background: #ff4d4d;
+}
+
+#gigs .gig.jfii::before {
+  background: #ff9b42;
+}
+
+#gigs .gig.sound-session::before {
+  background: #7c4dff;
+}
+
+#gigs .gig.private::before {
+  background: #999;
+}
+
+#gigs .gig.this-week {
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
+  transform: scale(1.01);
+}
+
+#gigs .gig.this-week::after {
+  content: "This Week";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.16);
+}
+
+#gigs .gig-date span {
+  font-weight: 800;
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+#gigs .gig-empty {
+  opacity: 0.8;
+  text-align: center;
+}
