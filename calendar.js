@@ -1,10 +1,18 @@
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
   function pad(n) {
     return String(n).padStart(2, "0");
   }
 
-  function formatDateICS(d) {
-    return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+  function formatDateTimeICS(d) {
+    return (
+      d.getFullYear() +
+      pad(d.getMonth() + 1) +
+      pad(d.getDate()) +
+      "T" +
+      pad(d.getHours()) +
+      pad(d.getMinutes()) +
+      "00"
+    );
   }
 
   function escapeICS(text) {
@@ -15,48 +23,73 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(/;/g, "\\;");
   }
 
-  function parseGigDate(el) {
-    const raw = el.getAttribute("data-date");
-    if (!raw) return null;
+  function parseGigDateTime(el) {
+    const rawDate = el.getAttribute("data-date");
+    const rawStart = el.getAttribute("data-start");
+    const rawEnd = el.getAttribute("data-end");
 
-    const parts = raw.split("-").map(Number);
-    if (parts.length !== 3) return null;
+    if (!rawDate) return null;
 
-    const [y, m, day] = parts;
-    if (!y || !m || !day) return null;
+    const [year, month, day] = rawDate.split("-").map(Number);
+    if (!year || !month || !day) return null;
 
-    return new Date(y, m - 1, day);
+    if (!rawStart || !rawEnd) {
+      return {
+        start: new Date(year, month - 1, day, 19, 0),
+        end: new Date(year, month - 1, day, 23, 0)
+      };
+    }
+
+    const [startHour, startMinute] = rawStart.split(":").map(Number);
+    const [endHour, endMinute] = rawEnd.split(":").map(Number);
+
+    const start = new Date(year, month - 1, day, startHour, startMinute);
+    const end = new Date(year, month - 1, day, endHour, endMinute);
+
+    if (end <= start) {
+      end.setDate(end.getDate() + 1);
+    }
+
+    return { start, end };
   }
 
   function textFromGig(el) {
-    const label = el.querySelector(".gig-date span");
-    const p = el.querySelector("p");
+    const titleText = el.querySelector(".gig-date span")?.textContent || "Live Show";
+    const details = el.querySelector("p")?.textContent || "";
 
-    const title = (label ? label.textContent : "Jon Fett Quartet Show").trim();
-    const details = (p ? p.textContent : "").trim();
+    const bandMatch = details.match(/^(.*?)\s•/);
+    const band = bandMatch ? bandMatch[1].trim() : "Live Show";
 
-    return { title, details };
+    const venueMatch = details.match(/•\s(.*?)\s—/);
+    const venue = venueMatch ? venueMatch[1].trim() : "";
+
+    const summary = venue ? `${band} - ${venue}` : band;
+
+    return {
+      summary,
+      details: `${titleText} | ${details}`.trim()
+    };
   }
 
   function collectGigs() {
-    const nodes = Array.from(document.querySelectorAll("#gigs .gig"));
+    const nodes = Array.from(document.querySelectorAll("#gigs .band-group .gig"));
 
     return nodes
-      .map(function (el) {
-        const d = parseGigDate(el);
-        if (!d) return null;
+      .map(el => {
+        const when = parseGigDateTime(el);
+        if (!when) return null;
 
-        const info = textFromGig(el);
+        const text = textFromGig(el);
+
         return {
-          d: d,
-          title: info.title,
-          details: info.details
+          start: when.start,
+          end: when.end,
+          summary: text.summary,
+          details: text.details
         };
       })
       .filter(Boolean)
-      .sort(function (a, b) {
-        return a.d.getTime() - b.d.getTime();
-      });
+      .sort((a, b) => a.start - b.start);
   }
 
   function buildICS(gigs) {
@@ -66,26 +99,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const lines = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//Outside Sounds//JFQ Gigs//EN",
+      "PRODID:-//Outside Sound Studios//Live Gigs//EN",
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH"
     ];
 
-    gigs.forEach(function (g, idx) {
-      const dtStart = formatDateICS(g.d);
-      const next = new Date(g.d);
-      next.setDate(next.getDate() + 1);
-      const dtEnd = formatDateICS(next);
-
-      const uid = `jfq-${dtStart}-${idx}@outsidesounds`;
+    gigs.forEach((g, idx) => {
+      const uid = `outside-sounds-${formatDateTimeICS(g.start)}-${idx}@outsidesoundstudios.com`;
 
       lines.push("BEGIN:VEVENT");
       lines.push(`UID:${uid}`);
       lines.push(`DTSTAMP:${nowUTC}`);
-      lines.push(`DTSTART;VALUE=DATE:${dtStart}`);
-      lines.push(`DTEND;VALUE=DATE:${dtEnd}`);
-      lines.push(`SUMMARY:${escapeICS(g.title)}`);
-      if (g.details) lines.push(`DESCRIPTION:${escapeICS(g.details)}`);
+      lines.push(`DTSTART:${formatDateTimeICS(g.start)}`);
+      lines.push(`DTEND:${formatDateTimeICS(g.end)}`);
+      lines.push(`SUMMARY:${escapeICS(g.summary)}`);
+      lines.push(`DESCRIPTION:${escapeICS(g.details)}`);
       lines.push("END:VEVENT");
     });
 
@@ -94,25 +122,26 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function downloadICS(filename, content) {
-    const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+    const blob = new Blob([content], {
+      type: "text/calendar;charset=utf-8"
+    });
 
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
+
     a.href = url;
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    a.remove();
 
-    setTimeout(function () {
-      URL.revokeObjectURL(url);
-    }, 1000);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   const btn = document.getElementById("download-ics");
   if (!btn) return;
 
-  btn.addEventListener("click", function () {
+  btn.addEventListener("click", () => {
     const gigs = collectGigs();
 
     if (!gigs.length) {
@@ -121,6 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const ics = buildICS(gigs);
-    downloadICS("JFQ_Gigs.ics", ics);
+    downloadICS("Outside_Sound_Studios_Gigs.ics", ics);
   });
-});
+})();
