@@ -12,24 +12,33 @@
   function parseDate(el) {
     const raw = el.getAttribute("data-date");
     if (!raw) return null;
+
     const parts = raw.split("-").map(Number);
     if (parts.length !== 3) return null;
-    const [y, m, d] = parts;
-    return new Date(y, m - 1, d);
+
+    const [year, month, day] = parts;
+    return new Date(year, month - 1, day);
   }
 
   function sortContainer(container) {
     const gigs = Array.from(container.querySelectorAll(".gig"));
-    gigs.sort((a, b) => parseDate(a) - parseDate(b));
+
+    gigs.sort((a, b) => {
+      const da = parseDate(a);
+      const db = parseDate(b);
+      return da - db;
+    });
+
     gigs.forEach(gig => container.appendChild(gig));
   }
 
-  const bandGroups = document.querySelectorAll(".band-group");
-  bandGroups.forEach(sortContainer);
+  document.querySelectorAll(".band-group").forEach(sortContainer);
 
   const thisWeekWrap = document.getElementById("this-week-gigs");
+
   if (thisWeekWrap) {
     const allGigs = Array.from(document.querySelectorAll(".band-group .gig"));
+
     const weekGigs = allGigs.filter(gig => {
       const d = parseDate(gig);
       return d && d >= weekStart && d <= weekEnd;
@@ -37,6 +46,7 @@
 
     if (weekGigs.length) {
       thisWeekWrap.innerHTML = "";
+
       weekGigs
         .sort((a, b) => parseDate(a) - parseDate(b))
         .forEach(gig => {
@@ -47,10 +57,10 @@
     }
   }
 
-  document.querySelectorAll(".gig").forEach(gig => {
+  document.querySelectorAll(".band-group .gig").forEach(gig => {
     const d = parseDate(gig);
-    if (!d) return;
-    if (d >= weekStart && d <= weekEnd) {
+
+    if (d && d >= weekStart && d <= weekEnd) {
       gig.classList.add("this-week");
     }
   });
