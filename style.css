@@ -902,3 +902,36 @@ header{
   opacity: 0.8;
   text-align: center;
 }
+#gigs .gig-jump-menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 1.25rem 0 1.5rem;
+}
+
+#gigs .gig-jump {
+  display: inline-block;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+}
+
+#gigs .jfq-jump {
+  box-shadow: inset 0 -4px 0 #ff4d4d;
+}
+
+#gigs .jfii-jump {
+  box-shadow: inset 0 -4px 0 #ff9b42;
+}
+
+#gigs .sound-jump {
+  box-shadow: inset 0 -4px 0 #7c4dff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
