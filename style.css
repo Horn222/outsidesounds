@@ -935,3 +935,21 @@ header{
 html {
   scroll-behavior: smooth;
 }
+#gigs .gig-actions .gig-btn,
+#gigs .gig-actions button.gig-btn,
+#gigs .gig-actions a.gig-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.85rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1;
+  appearance: none;
+  -webkit-appearance: none;
+}
