@@ -9,59 +9,85 @@
   weekEnd.setDate(weekStart.getDate() + 6);
   weekEnd.setHours(23, 59, 59, 999);
 
+  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+  const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  monthEnd.setHours(23, 59, 59, 999);
+
   function parseDate(el) {
     const raw = el.getAttribute("data-date");
     if (!raw) return null;
 
-    const parts = raw.split("-").map(Number);
-    if (parts.length !== 3) return null;
-
-    const [year, month, day] = parts;
+    const [year, month, day] = raw.split("-").map(Number);
     return new Date(year, month - 1, day);
   }
 
-  function sortContainer(container) {
-    const gigs = Array.from(container.querySelectorAll(".gig"));
-
-    gigs.sort((a, b) => {
-      const da = parseDate(a);
-      const db = parseDate(b);
-      return da - db;
-    });
-
-    gigs.forEach(gig => container.appendChild(gig));
+  function sortGigs(gigs) {
+    return gigs.sort((a, b) => parseDate(a) - parseDate(b));
   }
 
-  document.querySelectorAll(".band-group").forEach(sortContainer);
+  function cloneGig(gig, extraClass) {
+    const clone = gig.cloneNode(true);
+    if (extraClass) clone.classList.add(extraClass);
+    return clone;
+  }
 
-  const thisWeekWrap = document.getElementById("this-week-gigs");
+  function fillSection(containerId, gigs, emptyText, extraClass) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-  if (thisWeekWrap) {
-    const allGigs = Array.from(document.querySelectorAll(".band-group .gig"));
+    container.innerHTML = "";
 
-    const weekGigs = allGigs.filter(gig => {
-      const d = parseDate(gig);
-      return d && d >= weekStart && d <= weekEnd;
-    });
-
-    if (weekGigs.length) {
-      thisWeekWrap.innerHTML = "";
-
-      weekGigs
-        .sort((a, b) => parseDate(a) - parseDate(b))
-        .forEach(gig => {
-          const clone = gig.cloneNode(true);
-          clone.classList.add("this-week");
-          thisWeekWrap.appendChild(clone);
-        });
+    if (!gigs.length) {
+      container.innerHTML = `<p class="gig-empty">${emptyText}</p>`;
+      return;
     }
+
+    sortGigs(gigs).forEach(gig => {
+      container.appendChild(cloneGig(gig, extraClass));
+    });
   }
+
+  const bandGroups = document.querySelectorAll(".band-group");
+
+  bandGroups.forEach(group => {
+    const gigs = Array.from(group.querySelectorAll(".gig"));
+    sortGigs(gigs).forEach(gig => group.appendChild(gig));
+  });
+
+  const allGigs = Array.from(document.querySelectorAll(".band-group .gig"));
+
+  const upcomingGigs = allGigs.filter(gig => {
+    const d = parseDate(gig);
+    return d && d >= today;
+  });
+
+  const thisWeekGigs = upcomingGigs.filter(gig => {
+    const d = parseDate(gig);
+    return d >= weekStart && d <= weekEnd;
+  });
+
+  const thisMonthGigs = upcomingGigs.filter(gig => {
+    const d = parseDate(gig);
+    return d >= monthStart && d <= monthEnd;
+  });
+
+  const nextGig = sortGigs([...upcomingGigs]).slice(0, 1);
+
+  fillSection("next-gig", nextGig, "No upcoming shows currently listed.", "next-show");
+  fillSection("this-week-gigs", thisWeekGigs, "No shows scheduled this week.", "this-week");
+  fillSection("this-month-gigs", thisMonthGigs, "No shows scheduled this month.", "this-month");
+  fillSection("all-upcoming-gigs", upcomingGigs, "No upcoming shows currently listed.", "upcoming-show");
 
   document.querySelectorAll(".band-group .gig").forEach(gig => {
     const d = parseDate(gig);
+    if (!d) return;
 
-    if (d && d >= weekStart && d <= weekEnd) {
+    if (d >= weekStart && d <= weekEnd) {
       gig.classList.add("this-week");
+    }
+
+    if (d.getTime() === parseDate(nextGig[0] || document.createElement("div"))?.getTime()) {
+      gig.classList.add("next-show");
     }
   });
 })();
